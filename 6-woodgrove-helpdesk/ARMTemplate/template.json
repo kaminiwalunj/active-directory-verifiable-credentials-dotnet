@@ -129,7 +129,7 @@
         "httpsOnly": false,
         "redundancyMode": "None",
         "storageAccountRequired": false,
-        "keyVaultReferenceIdentity": "SystemAssigned",
+
 
         "siteConfig": {
           "numberOfWorkers": 1,
