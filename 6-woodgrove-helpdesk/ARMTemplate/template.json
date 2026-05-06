@@ -147,6 +147,10 @@
             {
               "name": "VerifiedID__ManagedIdentity",
               "value": "true"
+            },
+            {
+              "name": "VerifiedID__CredentialType",
+              "value": "VerifiedEmployee"
             }
           ]
         }
