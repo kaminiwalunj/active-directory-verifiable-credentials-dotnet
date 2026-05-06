@@ -140,10 +140,7 @@ namespace WoodgroveHelpdesk.Controllers
                 configuration = new WoodgroveHelpdesk.Models.Configuration() {
                     validation = new Validation() {
                         allowRevoked = allowRevoked,
-                        validateLinkedDomain = validateLinkedDomain,
-                        faceCheck = new FaceCheck() {
-                            sourcePhotoClaimName = _configuration.GetValue( "VerifiedID:sourcePhotoClaimName", "photo" ),
-                            matchConfidenceThreshold = _configuration.GetValue( "VerifiedID:matchConfidenceThreshold", 70 )
+                        validateLinkedDomain = validateLinkedDomain
                         }
                     }
                 }
@@ -152,7 +149,7 @@ namespace WoodgroveHelpdesk.Controllers
         }
         public bool IsFaceCheckRequested( WoodgroveHelpdesk.Models.PresentationRequest request ) {
             foreach( var rc in request.requestedCredentials ) {
-                if ( rc.configuration.validation.faceCheck != null ) {
+                if ( rc.configuration?.validation?.faceCheck != null ) {
                     return true;
                 }
             }
