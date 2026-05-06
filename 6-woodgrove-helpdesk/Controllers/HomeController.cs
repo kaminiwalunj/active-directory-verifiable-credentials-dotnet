@@ -182,7 +182,7 @@ namespace WoodgroveHelpdesk.Controllers
                 string email = null;
                 string displayName = null;
                 string expiryDate = null;
-                double matchConfidenceScore = (double)0;
+                double matchConfidenceScore = null;
                 string credentialType = _configuration.GetValue("VerifiedID:CredentialType", "VerifiedEmployee" );
                 string emailClaimName = _configuration.GetValue("VerifiedID:EmailClaimName", "mail");
                 string displayNameClaimName = _configuration.GetValue("VerifiedID:DisplayNameClaimName", "displayName");
@@ -197,7 +197,6 @@ namespace WoodgroveHelpdesk.Controllers
                             displayName = vc.claims[displayNameClaimName].ToString();
                         }
                         expiryDate = vc.expirationDate;
-                        matchConfidenceScore = vc.faceCheck.matchConfidenceScore;
                     }
                 }
                 if ( string.IsNullOrWhiteSpace( credentialType )) {
@@ -215,7 +214,6 @@ namespace WoodgroveHelpdesk.Controllers
                     email = email,
                     domain = domain,
                     expiryData = expiryDate,
-                    matchConfidenceScore = matchConfidenceScore,
                     didIssuer = didIssuer
                 };
                 _log.LogTrace( $"{cacheData.message}. email={email}" );
