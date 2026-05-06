@@ -37,7 +37,25 @@
         "description": "DidAuthority"
       },
       "defaultValue": "<DidAuthority>"
-    }
+    },
+    "TenantId": {
+  "type": "string",
+  "metadata": {
+    "description": "Microsoft Entra Tenant ID"
+  }
+},
+"ClientId": {
+  "type": "string",
+  "metadata": {
+    "description": "App Registration Client ID"
+  }
+},
+"ClientSecret": {
+  "type": "secureString",
+  "metadata": {
+    "description": "App Registration Client Secret"
+  }
+}
   },
   "variables": {
     "appServicePlanPortalName": "[concat(parameters('webAppName'), '-plan')]"
@@ -123,28 +141,48 @@
           "http20Enabled": false,
           "functionAppScaleLimit": 0,
           "minimumElasticInstanceCount": 0,
-          "appSettings": [
-            {
-              "name": "SCM_COMMAND_IDLE_TIMEOUT",
-              "value": "600"
-            },
-            {
-              "name": "PROJECT",
-              "value": "[parameters('Project')]"
-            },
-            {
-              "name": "VerifiedID__DidAuthority",
-              "value": "[parameters('DidAuthority')]"
-            },
-            {
-              "name": "AppSettings__UseTeamsWebhook",
-              "value": "false"
-            },
-            {
-              "name": "AppSettings__TeamsWebhookURL",
-              "value": "...set to incoming webhook if you decide to use a Teams Webhook..."
-            }
-          ]
+"appSettings": [
+  {
+    "name": "SCM_COMMAND_IDLE_TIMEOUT",
+    "value": "600"
+  },
+  {
+    "name": "PROJECT",
+    "value": "[parameters('Project')]"
+  },
+  {
+    "name": "VerifiedID__ManagedIdentity",
+    "value": "false"
+  },
+  {
+    "name": "VerifiedID__TenantId",
+    "value": "[parameters('TenantId')]"
+  },
+  {
+    "name": "VerifiedID__ClientId",
+    "value": "[parameters('ClientId')]"
+  },
+  {
+    "name": "VerifiedID__ClientSecret",
+    "value": "[parameters('ClientSecret')]"
+  },
+  {
+    "name": "VerifiedID__DidAuthority",
+    "value": "[parameters('DidAuthority')]"
+  },
+  {
+    "name": "VerifiedID__CredentialType",
+    "value": "VerifiedEmployee"
+  },
+  {
+    "name": "AppSettings__UseTeamsWebhook",
+    "value": "false"
+  },
+  {
+    "name": "AppSettings__TeamsWebhookURL",
+    "value": "...set to incoming webhook if you decide to use a Teams Webhook..."
+  }
+]
         }
       },
 
